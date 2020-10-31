@@ -24,6 +24,7 @@ public:
     ~SearchBinaryTree();
     void insertNode(int key);
     Node* subtreeSearch(int key, Node* node);
+    void preOrder(Node* node);
 };
 
 SearchBinaryTree::SearchBinaryTree()
@@ -52,18 +53,28 @@ Node* SearchBinaryTree::subtreeSearch(int key, Node* node)
 }
 
 void SearchBinaryTree::insertNode(int k)
+{
+  Node* newNode;
+  newNode = new Node(k, NULL, NULL);
+  if (!this->Root)
+    this->Root = newNode;
+  else
     {
-      Node* newNode;
-      newNode = new Node(k, NULL, NULL);
-      if (!this->Root)
-          this->Root = newNode;
+      Node* fatherNode;
+      fatherNode = subtreeSearch(k, this->Root);
+      if (k < fatherNode->Data)
+        fatherNode->Left = newNode;
       else
-      {
-        Node* fatherNode;
-        fatherNode = subtreeSearch(k, this->Root);
-        if (k < fatherNode->Data)
-          fatherNode->Left = newNode;
-        else
-          fatherNode->Right = newNode;
-      }
+        fatherNode->Right = newNode;
     }
+}
+
+void SearchBinaryTree::preOrder(Node* node)
+{
+  if(node != NULL)
+  {
+    cout << node->Data;
+    preOrder(node->Left);
+    preOrder(node->Right)
+  }
+}
