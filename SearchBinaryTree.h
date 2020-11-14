@@ -46,7 +46,7 @@ SearchBinaryTree::~SearchBinaryTree()
 
 Node* SearchBinaryTree::subtreeSearch(int key, Node* node)
 {
-  if (key < (node->Data))
+  if (key <= (node->Data))
   {
     if (node->Left != NULL)
       return subtreeSearch(key, node->Left);
@@ -61,7 +61,6 @@ Node* SearchBinaryTree::subtreeSearch(int key, Node* node)
 
 void SearchBinaryTree::insertNode(int k)
 {
-  cout << k << "\n";
   Node* newNode;
   newNode = new Node(k, NULL, NULL);
   if (this->Root == NULL)
@@ -70,18 +69,10 @@ void SearchBinaryTree::insertNode(int k)
     {
       Node* fatherNode;
       fatherNode = subtreeSearch(k, this->Root);
-      if (k < (fatherNode->Data))
-      {
+      if (k <= (fatherNode->Data))
         fatherNode->Left = newNode;
-        cout << fatherNode->Left->Data << " ";
-        cout << "to aqui 1\n";
-      }
       else
-      {
         fatherNode->Right = newNode;
-        cout << fatherNode->Right->Data << " ";
-        cout << "to aqui 2\n";
-      }
     }
 }
 
@@ -115,9 +106,9 @@ void SearchBinaryTree::inOrder(Node* node)
 {
   if(node != NULL)
   {
-    preOrder(node->Left);
+    inOrder(node->Left);
     cout << node->Data << " ";
-    preOrder(node->Right);
+    inOrder(node->Right);
   }
 }
 
@@ -126,8 +117,8 @@ void SearchBinaryTree::postOrder(Node* node)
 {
   if(node != NULL)
   {
-    preOrder(node->Left);
-    preOrder(node->Right);
+    postOrder(node->Left);
+    postOrder(node->Right);
     cout << node->Data << " ";
   }
 }

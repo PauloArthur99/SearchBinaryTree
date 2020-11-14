@@ -6,7 +6,6 @@ int main()
 {
   SearchBinaryTree* tree;
   tree = new SearchBinaryTree();
-  tree->insertNode(6);
   tree->insertNode(5);
   tree->insertNode(-2);
   tree->insertNode(7);
@@ -14,7 +13,11 @@ int main()
   tree->insertNode(0);
   tree->insertNode(6);
 
-  // tree->in_order();
+  tree->pre_order();
+  cout << "\n";
+  tree->in_order();
+  cout << "\n";
+  tree->post_order();
 
   delete tree;
 }
